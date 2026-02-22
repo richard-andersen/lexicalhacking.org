@@ -88,6 +88,14 @@
     }
     .related-toggle:hover{ opacity: 1; }
 
+    /* Visual confirmation when the drawer is open */
+    .related-toggle[aria-expanded="true"]{
+      background: #D9D9D9;
+      color: #FFFFFF;
+      border-color: rgba(255,255,255,0.55);
+      opacity: 1;
+    }
+
     .related-drawer{
       position: fixed;
       left: 0;

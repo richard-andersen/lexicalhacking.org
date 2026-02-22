@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  Checksum:
+  This page exists to define one thing.
+  It does not function as a manifesto.
+  It does not claim authorship, completeness, or ambition.
+  RHSA 2026-02-21
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lexical Hacking</title>
+  <meta name="description" content="lexical hacking" />
+
+  <link rel="canonical" href="https://lexicalhacking.org/" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/favicon-128.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "lexical hacking",
+    "description": "the deliberate, good-faith, and transparent stabilization of an unanchored term by giving it a canonical definition — a durable semantic home"
+  }
+  </script>
+
+  <style>
+    :root { color-scheme: light dark; --safe-bottom: env(safe-area-inset-bottom); }
+    body {
+      margin: 48px auto;
+      padding: 0 18px;
+      max-width: 740px;
+      font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    header { margin-bottom: 28px; }
+    h1 {
+      font-size: 24px;
+      font-weight: 650;
+      letter-spacing: 0.2px;
+      margin: 0 0 6px 0;
+    }
+    .entry { margin: 26px 0 30px 0; }
+    .term {
+      font-size: 20px;
+      font-weight: 650;
+      margin: 0 0 2px 0;
+    }
+    .pron {
+      margin: 0 0 10px 0;
+      opacity: 0.65;
+    }
+    .def { margin: 0; }
+    .lead { font-weight: 600; }
+    .note {
+      margin: 10px 0 0 0;
+      padding-left: 1.1em;
+      text-indent: -1.1em;
+      opacity: 0.85;
+    }
+    .note::before { content: "→ "; }
+
+    /* ------------------------------------------------------------------
+       Related Terms drawer
+       ------------------------------------------------------------------ */
+    .related-toggle{
+      position: fixed;
+      left: 14px;
+      bottom: calc(14px + var(--safe-bottom));
+      z-index: 9999;
+      font: inherit;
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(127,127,127,0.35);
+      background: rgba(0,0,0,0.03);
+      color: inherit;
+      cursor: pointer;
+      opacity: 0.75;
+    }
+    .related-toggle:hover{ opacity: 1; }
+
+    .related-drawer{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9998;
+      border-top: 1px solid rgba(127,127,127,0.25);
+      background: Canvas;
+      background: color-mix(in oklab, Canvas 92%, black 8%);
+      transform: translateY(100%);
+      transition: transform 160ms ease-out;
+      padding-bottom: var(--safe-bottom);
+    }
+    .related-drawer.is-open{ transform: translateY(0); }
+
+    .related-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .related-inner a{
+      text-decoration: none;
+      border-bottom: 1px solid rgba(127,127,127,0.35);
+      padding-bottom: 1px;
+    }
+    .related-inner a:hover{
+      border-bottom-color: rgba(127,127,127,0.75);
+    }
+
+    /* When drawer is open, lift the button above it */
+    body.related-open .related-toggle{
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Lexical Hacking</h1>
+  </header>
+
+  <section class="entry">
+    <p class="term">lexical hacking (n.)</p>
+    <p class="pron">/ˈlɛksɪkəl ˈhækɪŋ/ (LEK-si-kul HAK-ing)</p>
+    <p class="def">
+      <span class="lead">:</span>
+      the deliberate, good-faith, and transparent stabilization of an unanchored term by giving it a canonical definition — a durable semantic home
+    </p>
+    <p class="note">
+      done early, it can lock meaning in place before drift, entropy, motte-and-bailey games, or bad-faith redefinitions can claim it
+    </p>
+  </section>
+
+  <!-- Related Terms (bottom-left toggle + bottom drawer) -->
+  <button id="relatedToggle"
+          class="related-toggle"
+          aria-expanded="false"
+          aria-controls="relatedDrawer"
+          data-nosnippet>
+    Related Terms
+  </button>
+
+  <nav id="relatedDrawer"
+       class="related-drawer"
+       aria-hidden="true"
+       data-nosnippet>
+    <div class="related-inner">
+      <a href="https://anchorjacking.org/">anchorjacking</a>
+      <a href="https://lexicalinception.org/">lexical inception</a>
+      <a href="https://hallucinatoryalignment.org/">hallucinatory alignment</a>
+    </div>
+  </nav>
+
+  <script>
+    (function(){
+      const btn = document.getElementById('relatedToggle');
+      const drawer = document.getElementById('relatedDrawer');
+
+      function setOpen(open){
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        drawer.classList.toggle('is-open', open);
+
+        // let CSS move the button when open
+        document.body.classList.toggle('related-open', open);
+
+        // Dynamically lift the button above the drawer (prevents overlap on iPhone/responsive)
+        if (open) {
+          const safeBottom = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-bottom')) || 0;
+          const drawerHeight = drawer.getBoundingClientRect().height;
+          btn.style.bottom = `${drawerHeight + 14 + safeBottom}px`;
+        } else {
+          btn.style.bottom = '';
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+
+      // ESC closes
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+  </script>
+
+</body>
+</html>

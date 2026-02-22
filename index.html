@@ -6,14 +6,14 @@
   This page exists to define one thing.
   It does not function as a manifesto.
   It does not claim authorship, completeness, or ambition.
-  RHSA 2026-02-21
+  RHSA 2025-12-20
   -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lexical Hacking</title>
-  <meta name="description" content="lexical hacking" />
+  <title>Lexical Inception</title>
+  <meta name="description" content="lexical inception" />
 
-  <link rel="canonical" href="https://lexicalhacking.org/" />
+  <link rel="canonical" href="https://lexicalinception.org/" />
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -28,8 +28,8 @@
   {
     "@context": "https://schema.org",
     "@type": "DefinedTerm",
-    "name": "lexical hacking",
-    "description": "the deliberate, good-faith, and transparent stabilization of an unanchored term by giving it a canonical definition — a durable semantic home"
+    "name": "lexical inception",
+    "description": "the deliberate seeding of specific words or phrases into an audience’s vocabulary such that they are later used as if self-generated"
   }
   </script>
 
@@ -47,6 +47,11 @@
       font-weight: 650;
       letter-spacing: 0.2px;
       margin: 0 0 6px 0;
+    }
+    .subtle {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 14px;
     }
     .entry { margin: 26px 0 30px 0; }
     .term {
@@ -67,6 +72,18 @@
       opacity: 0.85;
     }
     .note::before { content: "→ "; }
+
+    hr.divider{
+      border: 0;
+      border-top: 1px solid rgba(127,127,127,0.25);
+      margin: 26px 0 10px 0;
+    }
+
+    footer {
+      margin-top: 34px;
+      font-size: 13px;
+      opacity: 0.65;
+    }
 
     /* ------------------------------------------------------------------
        Related Terms drawer
@@ -105,9 +122,9 @@
       border-top: 1px solid rgba(127,127,127,0.25);
       background: Canvas;
       background: color-mix(in oklab, Canvas 92%, black 8%);
+      padding-bottom: var(--safe-bottom);
       transform: translateY(100%);
       transition: transform 160ms ease-out;
-      padding-bottom: var(--safe-bottom);
     }
     .related-drawer.is-open{ transform: translateY(0); }
 
@@ -138,19 +155,17 @@
 
 <body>
   <header>
-    <h1>Lexical Hacking</h1>
+    <h1>Lexical Inception</h1>
   </header>
 
   <section class="entry">
-    <p class="term">lexical hacking (n.)</p>
-    <p class="pron">/ˈlɛksɪkəl ˈhækɪŋ/ (LEK-si-kul HAK-ing)</p>
+    <p class="term">lexical inception</p>
+    <p class="pron">/ˈlɛksɪkəl ɪnˈsɛpʃən/ (LEK-si-kul in-SEP-shun)</p>
     <p class="def">
       <span class="lead">:</span>
-      the deliberate, good-faith, and transparent stabilization of an unanchored term by giving it a canonical definition — a durable semantic home
+      the deliberate seeding of specific words or phrases into an audience’s vocabulary such that they are later used as if self-generated
     </p>
-    <p class="note">
-      done early, it can lock meaning in place before drift, entropy, motte-and-bailey games, or bad-faith redefinitions can claim it
-    </p>
+    <p class="note">distinguished from lexical convergence, which is passive and emergent</p>
   </section>
 
   <!-- Related Terms (bottom-left toggle + bottom drawer) -->
@@ -168,8 +183,8 @@
        data-nosnippet>
     <div class="related-inner">
       <a href="https://anchorjacking.org/">anchorjacking</a>
-      <a href="https://lexicalinception.org/">lexical inception</a>
       <a href="https://hallucinatoryalignment.org/">hallucinatory alignment</a>
+      <a href="https://lexicalhacking.org/">lexical hacking</a>
     </div>
   </nav>
 

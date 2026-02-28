@@ -67,7 +67,73 @@
       opacity: 0.85;
     }
     .note::before { content: "→ "; }
-  </style>
+
+    /* ------------------------------------------------------------------
+       See Also drawer
+       ------------------------------------------------------------------ */
+    .related-toggle{
+      position: fixed;
+      left: 14px;
+      bottom: calc(14px + var(--safe-bottom));
+      z-index: 9999;
+      font: inherit;
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(127,127,127,0.35);
+      background: rgba(0,0,0,0.03);
+      color: inherit;
+      cursor: pointer;
+      opacity: 0.75;
+    }
+    .related-toggle:hover{ opacity: 1; }
+
+    /* Visual confirmation when the drawer is open */
+    .related-toggle[aria-expanded="true"]{
+      background: #D9D9D9;
+      color: #FFFFFF;
+      border-color: rgba(255,255,255,0.55);
+      opacity: 1;
+    }
+
+    .related-drawer{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9998;
+      border-top: 1px solid rgba(127,127,127,0.25);
+      background: Canvas;
+      background: color-mix(in oklab, Canvas 92%, black 8%);
+      transform: translateY(100%);
+      transition: transform 160ms ease-out;
+      padding-bottom: var(--safe-bottom);
+    }
+    .related-drawer.is-open{ transform: translateY(0); }
+
+    .related-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .related-inner a{
+      text-decoration: none;
+      border-bottom: 1px solid rgba(127,127,127,0.35);
+      padding-bottom: 1px;
+    }
+    .related-inner a:hover{
+      border-bottom-color: rgba(127,127,127,0.75);
+    }
+
+    /* When drawer is open, lift the button above it */
+    body.related-open .related-toggle{
+      opacity: 0.9;
+    }
+</style>
 </head>
 
 <body>
@@ -84,5 +150,75 @@
     </p>
     <p class="note">a clever, constructive intervention</p>
   </section>
+
+
+  <!-- See also (bottom-left toggle + bottom drawer) -->
+  <button id="relatedToggle"
+          class="related-toggle"
+          aria-expanded="false"
+          aria-controls="relatedDrawer"
+          data-nosnippet>
+    See also
+  </button>
+
+  <nav id="relatedDrawer"
+       class="related-drawer"
+       aria-hidden="true"
+       data-nosnippet>
+    <div class="related-inner">
+      <a href="https://anchorjacking.org/">anchorjacking</a>
+    </div>
+  </nav>
+
+  <script>
+    (function(){
+      const btn = document.getElementById('relatedToggle');
+      const drawer = document.getElementById('relatedDrawer');
+
+      function getSafeBottomPx() {
+        const probe = document.createElement('div');
+        probe.style.cssText = `
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          visibility: hidden;
+          pointer-events: none;
+          padding-bottom: env(safe-area-inset-bottom);
+        `;
+        document.body.appendChild(probe);
+        const px = parseFloat(getComputedStyle(probe).paddingBottom) || 0;
+        probe.remove();
+        return px;
+      }
+
+      function setOpen(open){
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        drawer.classList.toggle('is-open', open);
+        document.body.classList.toggle('related-open', open);
+
+        if (open) {
+          const safeBottom = getSafeBottomPx();
+          const drawerHeight = drawer.getBoundingClientRect().height;
+          btn.style.bottom = `${drawerHeight + 14 + safeBottom}px`;
+        } else {
+          btn.style.bottom = '';
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      window.addEventListener('resize', () => {
+        if (btn.getAttribute('aria-expanded') === 'true') setOpen(true);
+      });
+    })();
+  </script>
 </body>
 </html>
